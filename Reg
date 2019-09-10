@@ -1,0 +1,117 @@
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+
+
+
+
+public class Rsystem
+{
+  static void addUser(String name, int age)
+{
+    File plik= new File("File.txt");
+    FileWriter f=null;
+    try
+    {
+        f=new FileWriter(plik);
+        f.write(name + " " + age);
+    }catch(IOException x)
+    {
+        System.out.println("Bad source!");
+    }finally
+    {
+        try{
+        if(!(f==null))f.close();
+        }catch(IOException a)
+        {
+            System.out.println("Something bad...");
+        }
+    }
+    
+    
+}
+    
+    
+    static void deleteUser(String name)
+    {
+        File plik= new File("File.txt");
+        File plik2=new File("File2.txt");
+        Scanner f=new Scanner("File.txt");
+        FileWriter g=null;
+        String temp;
+        try
+        {
+            
+            g=new FileWriter("File2.txt");
+        
+        do
+        {
+           temp=f.nextLine();
+           if(temp.contains(name))continue;
+           g.write(temp);
+        }while(temp!=null);
+        
+        }
+        catch(FileNotFoundException a)
+                {
+                System.out.println("This File not exist!");
+                }
+        catch(IOException b)
+                {
+                System.out.println("Something wrong...");
+                }
+        finally
+        {
+            try{
+            f.close();
+            g.close();
+            }catch(IOException z)
+            {
+                System.out.println("Something bad again...");
+            }
+        }
+    }
+    
+    
+    public static void main(String[] args) throws IOException
+    {
+        
+        String name;
+        int age;
+        char temp='0';
+	Scanner zmienna=new Scanner("File.txt");
+        BufferedReader x= new BufferedReader(new InputStreamReader(System.in));
+        Scanner y=new Scanner(System.in);
+String temporary;
+
+        
+        
+ while(true)
+{
+                    System.out.println("Type 1 for write in user.");
+                    System.out.println("Type 2 for delete user.");
+                    System.out.println("Others for finish program.");
+                    temp=(char)x.read();
+                    
+                    if(temp=='1')
+                    {
+                        System.out.println("Give a name: ");
+                        name=y.next();
+                        System.out.println("Give an age: ");
+                        age=y.nextInt();
+                        addUser(name, age);
+                    }else if(temp=='2')
+                    {
+                        System.out.println("Give a name to delete: ");
+                        name=x.readLine();
+                        deleteUser(name);
+                    }else{break;}
+}
+
+        zmienna.close();
+        x.close();
+        y.close();
+    }
+}
